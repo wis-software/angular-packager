@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wis-software/build-tools.git"
+    "url": "https://github.com/wis-software/angular-packager.git"
   },
   "author": {
     "name": "WIS-Software/Firestitch",
@@ -17,7 +17,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wis-software/build-tools/issues"
+    "url": "https://github.com/wis-software/angular-packager/issues"
   },
   "main": "package/index.js",
   "typings": "package/index.d.ts",
