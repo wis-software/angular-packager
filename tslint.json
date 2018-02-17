@@ -1,0 +1,3 @@
+{
+  "extends": "./tools/config/tslint.json"
+}

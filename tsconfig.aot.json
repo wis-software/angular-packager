@@ -1,0 +1,9 @@
+{
+  "angularCompilerOptions": {
+    "genDir": "package/",
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": true,
+    "annotationsAs": "decorators"
+  },
+  "extends": "./tools/config/tsconfig.aot.json"
+}

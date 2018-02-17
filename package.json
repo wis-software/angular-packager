@@ -1,0 +1,99 @@
+{
+  "name": "angular-packager",
+  "description": "Webpack & ts configs for building libraries for npm",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wis-software/build-tools.git"
+  },
+  "author": {
+    "name": "WIS-Software/Firestitch",
+    "email": "hello@wis.software"
+  },
+  "keywords": [
+    "angular",
+    "npm",
+    "package"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wis-software/build-tools/issues"
+  },
+  "main": "package/index.js",
+  "typings": "package/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean:build": "rimraf build",
+    "clean:demo": "rimraf demo",
+    "clean:package": "rimraf package",
+    "copy:build": "cpx -v \"src/**/*\" \"build\"",
+    "copy:styles": "cpx -v \"build/**/*.css\" \"package\"",
+    "copy:templates": "cpx -v \"build/**/*.html\" \"package\"",
+    "package": "npm-run-all -s clean:build clean:package copy:build build:sass package:replace-scss package:aot package:build copy:styles copy:templates package:minify clean:build",
+    "package:aot": "ngc -p tsconfig.aot.json",
+    "package:replace-scss": "node ./tools/replace-scss.js",
+    "package:dev": "webpack --config=tools/webpack.dev.js --progress --profile --watch",
+    "package:minify": "uglifyjs package/index.js --source-map --compress --mangle --screw-ie8 --output package/index.min.js",
+    "package:build": "webpack --config=tools/webpack.package.js --progress --profile",
+    "demo": "npm-run-all -s clean:demo demo:webpack",
+    "demo:webpack": "webpack --config=tools/webpack.demo.js --progress --profile",
+    "build:sass": "node-sass -r build/ -o build/ || true",
+    "serve": "webpack-dev-server --config=tools/webpack.playground.js --progress --profile --watch",
+    "lint": "tslint 'src/**/*.ts' -p ./tslint.json"
+  },
+  "devDependencies": {
+    "@angular/common": "^5.2.4",
+    "@angular/compiler": "^5.2.4",
+    "@angular/compiler-cli": "^5.2.4",
+    "@angular/core": "^5.2.4",
+    "@angular/platform-browser": "^5.2.4",
+    "@angular/platform-browser-dynamic": "^5.2.4",
+    "@types/node": "^6.0.99",
+    "angular-router-loader": "^0.8.2",
+    "angular2-template-loader": "^0.6.2",
+    "awesome-typescript-loader": "^3.4.1",
+    "babel-core": "^6.26.0",
+    "codelyzer": "~3.2.0",
+    "copy-webpack-plugin": "^4.4.1",
+    "core-js": "^2.5.3",
+    "cpx": "^1.5.0",
+    "css-loader": "^0.28.8",
+    "css-to-string-loader": "^0.1.3",
+    "del": "^2.2.2",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.5.2",
+    "node-sass-tilde-importer": "^1.0.0",
+    "npm-run-all": "^4.1.2",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-flexbugs-fixes": "^3.2.0",
+    "postcss-loader": "^2.1.0",
+    "raw-loader": "^0.5.1",
+    "replace": "^0.3.0",
+    "resolve-url-loader": "^2.2.1",
+    "rxjs": "^5.5.5",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.1",
+    "systemjs": "^0.20.12",
+    "to-string-loader": "^1.1.5",
+    "ts-node": "~3.2.0",
+    "tslint": "~5.7.0",
+    "typescript": "~2.4.2",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.0",
+    "webpack-dll-bundles-plugin": "^1.0.0-beta.5",
+    "webpack-merge": "^4.1.1",
+    "zone.js": "^0.8.14"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  },
+  "dependencies": {
+    "tsmodels": "^0.2.7"
+  }
+}
